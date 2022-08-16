@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-favicon">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    #favicon {
+        fill: #101010;
+    }
+    @media (prefers-color-scheme: dark) {
+        #favicon {
+            fill: #ff6e48;
+        }
+    }
+  </style>
+  <g clip-path="url(#clip-favicon)">
+    <path id="favicon" data-name="Pfad 20" d="M264.089,0H120.679V263.086s-.334,16.715-16.714,16.715S87.25,263.086,87.25,263.086V81.567H.669L0,270.775s.334,103.3,103.63,103.3,99.953-89.924,99.953-89.924V82.57h50.812s53.152-1.671,53.152,64.852-85.912,54.489-85.912,54.489v81.9c185.531,0,175.168-136.056,175.168-136.056C396.8-1.337,264.089,0,264.089,0" transform="translate(58 69)"/>
+  </g>
+</svg>
