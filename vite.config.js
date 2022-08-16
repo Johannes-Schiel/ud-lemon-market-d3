@@ -1,14 +1,16 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig({
-	test: {
-		include: ['**/js/*.test.js'],
-		globals: true,
-		reporters: 'verbose',
-	},
-	root: 'src',
-	build: {
-		emptyOutDir: true,
-		outDir: '../dist',
-	},
+export default defineConfig(({ command, mode }) => {
+	const env = loadEnv(mode, process.cwd(), '');
+	return {
+		// vite config
+		define: {
+			LEMON_MARKET_KEY: env.VITE_LEMON_MARKET_KEY,
+		},
+		root: 'src',
+		build: {
+			emptyOutDir: true,
+			outDir: '../dist',
+		},
+	};
 });

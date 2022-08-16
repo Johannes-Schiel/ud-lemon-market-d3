@@ -10,6 +10,49 @@
 	<body>
 		<!-- Tutorial Start -->
 
+		<div class="wrapper">
+			<header>
+				<img src="./assets/image/logo.svg" alt="Logo Lemon Markets" />
+			</header>
+
+			<form class="search-form">
+				<div class="input-search">
+					<img src="./assets/image/search.svg" alt="search icon" />
+					<label for="search">Suche nach ISIM</label>
+					<input id="search" name="search" type="text" />
+				</div>
+			</form>
+
+			<div id="info" class="info">
+				<div class="name">
+					<p class="label">Name</p>
+					<p id="name" class="name"></p>
+					<p id="name-full" class="name-full"></p>
+				</div>
+				<div id="global" class="details"> </div>
+				<div id="stats" class="details">
+					<div class="detail">
+						<p class="label">Open</p>
+						<p class="value">62,40€</p>
+					</div>
+					<div class="detail">
+						<p class="label">High</p>
+						<p class="value">102,10€</p>
+					</div>
+					<div class="detail">
+						<p class="label">Low</p>
+						<p class="value">81,62€</p>
+					</div>
+					<div class="detail">
+						<p class="label">Close</p>
+						<p class="value">71,25€</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="d3-graph"></div>
+
 		<!-- Tutorial Ende -->
 
 		<script type="module" src="./js/main.js"></script>
