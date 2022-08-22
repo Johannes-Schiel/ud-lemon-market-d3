@@ -7,14 +7,13 @@ const SEARCH_FORM = document.querySelector('#search');
 const NAME = document.querySelector('#name');
 const FULL_NAME = document.querySelector('#name-full');
 const INFO = document.querySelector('#info');
+const INFO_DETAILS = ['isin', 'wkn', 'symbol', 'type'];
 
 const config = {
 	headers: {
-		Authorization: `Bearer ${import.meta.env.LEMON_MARKET_KEY}`,
+		Authorization: `Bearer ${import.meta.env.VITE_KEY}`,
 	},
 };
-
-console.log(import.meta.env.LEMON_MARKET_KEY);
 
 SEARCH_FORM.addEventListener('keyup', ($event) => search($event));
 
@@ -37,11 +36,9 @@ function getDetails(isin) {
 				clear();
 				const result = res.data.results[0];
 				if (result) {
-					GLOBAL.appendChild(createDetail('isin', result.isin));
-					GLOBAL.appendChild(createDetail('wkn', result.wkn));
-					GLOBAL.appendChild(createDetail('symbol', result.symbol));
-					GLOBAL.appendChild(createDetail('type', result.type));
-
+					INFO_DETAILS.forEach((elm) => {
+						GLOBAL.appendChild(createDetail(elm, result[elm]));
+					});
 					setName(result.title, result.name);
 				}
 			},
