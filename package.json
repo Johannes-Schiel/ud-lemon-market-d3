@@ -1,28 +1,36 @@
 {
-	"name": "ud-basic-webdev-setup",
-	"private": false,
-	"version": "2.1.0",
-	"discription": "Bei diesem Repository handelt es sich um meine \"Test-/Entwicklungsumgebung\" für alle meine YouTube Tutorials. Sie basiert auf Vite, JS und SCSS",
-	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"test": "vitest",
-		"coverage": "vitest run --coverage",
-		"preview": "vite preview",
-		"format": "prettier --write \"src/**/*.js\" \"src/**/*.html\" \"src/**/*.scss\""
-	},
-	"devDependencies": {
-		"c8": "^7.11.3",
-		"sass": "^1.49.9",
-		"vite": "^2.8.0"
-	},
-	"dependencies": {
-		"axios": "^0.27.2",
-		"dotenv": "^16.0.1",
-		"eslint": "^8.10.0",
-		"eslint-config-prettier": "^8.4.0",
-		"eslint-plugin-prettier": "^4.0.0",
-		"prettier": "^2.5.1",
-		"vitest": "^0.22.0"
-	}
+  "name": "lemon-markets",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "core-js": "^3.19.3",
+    "nuxt": "^2.15.8",
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.3",
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^8.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-nuxt": "^3.1.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "prettier": "^2.5.1"
+  }
 }
