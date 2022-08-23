@@ -129,7 +129,7 @@ export default {
 				.attr('stroke-width', 20)
 				.attr('data-date', (d: Ohlc) => d.t)
 				.attr('class', 'background')
-				.on('click', ($event) => {
+				.on('mouseenter', ($event) => {
 					const data = this.data.find(
 						(elm: Ohlc) => elm.t === $event.target.dataset.date
 					);
