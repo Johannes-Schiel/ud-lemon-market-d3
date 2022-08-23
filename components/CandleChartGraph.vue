@@ -156,9 +156,13 @@ svg#graph {
 	border-radius: 1rem;
 	color: rgba($ciWhite, 0.3);
 	.tick {
-		stroke: rgba($ciWhite, 0.05);
+		stroke: rgba($ciWhite, 1);
+		stroke-dasharray: 0.3rem;
+		stroke-dashoffset: 0.3rem;
 		text {
-			fill: rgba($ciWhite, 0.05);
+			font-family: $roboto;
+			stroke-width: 0;
+			fill: rgba($ciWhite, 1);
 		}
 	}
 }
