@@ -20,7 +20,7 @@ const {
 	pending,
 	error,
 } = await useFetch<OhlcResponse>(
-	`https://data.lemon.markets/v1/ohlc/d1?isin=${route.query.search}&from=2022-08-15T00:00:00.000Z&to=2022-08-23T00:00:00.000Z`,
+	`https://data.lemon.markets/v1/ohlc/d1?isin=${route.query.search}&from=2022-07-01T00:00:00.000Z&to=2022-07-30T00:00:00.000Z`,
 	{
 		headers: {
 			Authorization: `Bearer ${config.TOKEN}`,

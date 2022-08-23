@@ -6,37 +6,17 @@ Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
 Make sure to install the dependencies:
 
-```bash
-# yarn
-yarn install
+### 1. TOKEN korrekt erstellen
 
-# npm
-npm install
+Es muss eine neue Datei angelegt werden
 
-# pnpm
-pnpm install --shamefully-hoist
+```txt
+TOKEN=1234asduifnb1834nbf8u<sdß87ß13h4hfaisudhnfß873ßn84v8udhfivudsfßhv89sg...
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+### 2. Server Starten
 
 ```bash
-npm run dev
+> npm install # installiert Packages
+> npm run dev # startet den Dev Server
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.

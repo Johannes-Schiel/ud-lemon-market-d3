@@ -126,15 +126,15 @@ export default {
 			g.append('line')
 				.attr('y1', this.margin.top)
 				.attr('y2', this.height - this.margin.bottom)
-				.attr('stroke-width', 30)
+				.attr('stroke-width', 20)
 				.attr('data-date', (d: Ohlc) => d.t)
+				.attr('class', 'background')
 				.on('click', ($event) => {
 					const data = this.data.find(
 						(elm: Ohlc) => elm.t === $event.target.dataset.date
 					);
 					this.$emit('clicked', data);
-				})
-				.attr('opacity', 0);
+				});
 		},
 	},
 	onUnmounted() {
@@ -148,8 +148,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-svg {
+<style lang="scss">
+svg#graph {
 	width: 100%;
 	height: auto;
 	background-color: rgba($ciWhite, 0.05);
@@ -160,6 +160,15 @@ svg {
 		text {
 			fill: rgba($ciWhite, 0.05);
 		}
+	}
+}
+.background {
+	opacity: 0;
+	stroke: rgba($ciWhite, 1);
+	cursor: pointer;
+	transition: 250ms all;
+	&:hover {
+		opacity: 0.05;
 	}
 }
 </style>
