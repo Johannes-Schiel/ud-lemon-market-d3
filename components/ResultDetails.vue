@@ -7,8 +7,6 @@
 
 <script lang="ts">
 import { PropType } from 'vue';
-import { LabelValuePair } from '../interfaces/LabelValuePair.interface';
-import { ResultName } from '../interfaces/ResultName.interface';
 
 export default {
 	props: {

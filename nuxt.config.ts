@@ -11,4 +11,7 @@ export default defineNuxtConfig({
             },
         },
     },
+    runtimeConfig: {
+        TOKEN: process.env.TOKEN
+    }
 })

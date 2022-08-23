@@ -9,5 +9,8 @@
   "devDependencies": {
     "nuxt": "3.0.0-rc.8",
     "sass": "^1.54.5"
+  },
+  "dependencies": {
+    "d3": "^7.6.1"
   }
 }

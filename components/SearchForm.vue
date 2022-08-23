@@ -3,14 +3,27 @@
 		<div class="inputfield">
 			<img src="@/assets/images/search.svg" alt="search icon" />
 			<input
-				id="isin-search"
-				name="isin-search"
+				id="search"
+				name="search"
 				placeholder="Suche nach einer ISIN"
+				:value="init"
 				type="search" />
-			<label for="isin-search">Suche nach einer ISIN</label>
+			<label for="search">Suche nach einer ISIN</label>
 		</div>
 	</form>
 </template>
+
+<script lang="ts">
+export default {
+	props: {
+		init: {
+			type: String,
+			required: false,
+			default: '',
+		},
+	},
+};
+</script>
 
 <style lang="scss" scoped>
 form {

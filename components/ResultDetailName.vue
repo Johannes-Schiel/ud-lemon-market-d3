@@ -1,14 +1,13 @@
 <template>
 	<div class="titel-name">
 		<ResultDetailLabel>Name</ResultDetailLabel>
-		<ResultDetailValue>{{ name.titel }}</ResultDetailValue>
+		<ResultDetailValue>{{ name.title }}</ResultDetailValue>
 		<ResultDetailValue class="small">{{ name.name }}</ResultDetailValue>
 	</div>
 </template>
 
 <script lang="ts">
 import { PropType } from 'vue';
-import { ResultName } from '../interfaces/ResultName.interface';
 
 export default {
 	props: {
