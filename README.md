@@ -8,7 +8,7 @@ Make sure to install the dependencies:
 
 ### 1. TOKEN korrekt erstellen
 
-Es muss eine neue Datei angelegt werden
+Es muss eine neue Datei `.env` auf der obersten Ebene angelegt werden
 
 ```txt
 TOKEN=1234asduifnb1834nbf8u<sdß87ß13h4hfaisudhnfß873ßn84v8udhfivudsfßhv89sg...
