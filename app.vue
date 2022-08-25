@@ -2,20 +2,19 @@
 	<div class="wrapper">
 		<LemonMarketLogo />
 		<LemonMarketSearch :init="route.query.search" />
-		<temaplte v-if="!pending && !error && instrument.results.length > 0">
-			{{ instrument }}
-		</temaplte>
-		<div class="error" v-if="error">Keine Daten gefunden</div>
+		<template v-if="!pending && !error && instrument.results.length > 0">
+			<LemonMarketInstrument :instrument="instrument.results[0]" />
+		</template>
+		<div class="error" v-if="error"> Keine Daten gefunden </div>
 	</div>
 </template>
 
 <script lang="ts" setup>
 const route = useRoute();
 const config = useRuntimeConfig();
-
 const {
-	error,
 	pending,
+	error,
 	data: instrument,
 } = await useFetch<InstrumentResponse>(
 	`https://data.lemon.markets/v1/instruments/?isin=${route.query.search}`,
