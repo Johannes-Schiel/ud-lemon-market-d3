@@ -4,6 +4,11 @@
 			:ohlc="
 				state.currentOhlc || data.results[data.results.length - 1]
 			" />
+		<div class="graph">
+			<LemonMarketChartGraph
+				@userSelection="change($event)"
+				:data="data.results" />
+		</div>
 	</template>
 </template>
 
@@ -20,6 +25,10 @@ const { data, pending, error } = await useFetch<OhlcResponse>(
 		},
 	}
 );
+
+function change(ohlc: Ohlc): void {
+	state.currentOhlc = ohlc;
+}
 </script>
 
 <style lang="scss"></style>
