@@ -6,6 +6,7 @@
 			<LemonMarketInstrument :instrument="instrument.results[0]" />
 		</template>
 		<div class="error" v-if="error"> Keine Daten gefunden </div>
+		<LemonMarketChart />
 	</div>
 </template>
 
