@@ -1,17 +1,12 @@
 <template>
 	<div class="wrapper">
-		<Logo />
-		<SearchForm :init="route.query.search" />
+		<LemonMarketLogo />
+		<LemonMarketSearch :init="route.query.search" />
 		<div v-if="!pending && !error">
-			<ResultDetails
-				:name="{
-					name: instrument.results[0].name,
-					title: instrument.results[0].title,
-				}"
-				:pairs="mapDetails(instrument.results[0])" />
+			<LemonMarketInstrument :instrument="instrument.results[0]" />
 		</div>
 		<div class="error" v-if="error"> Keine Daten gefunden </div>
-		<CandleChart />
+		<LemonMarketChart />
 	</div>
 </template>
 
