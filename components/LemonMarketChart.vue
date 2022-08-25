@@ -3,7 +3,7 @@
 		<LemonMarketChartOhlc :ohlc="state.currentOhlc || data.results[0]" />
 		<div class="graph">
 			<LemonMarketChartGraph
-				@userselection="change($event)"
+				@userSelection="change($event)"
 				:data="data.results" />
 		</div>
 	</template>
@@ -15,7 +15,7 @@ const config = useRuntimeConfig();
 const state = reactive({ currentOhlc: null });
 
 const { data, pending, error } = await useFetch<OhlcResponse>(
-	`https://data.lemon.markets/v1/ohlc/d1?isin=${route.query.search}&from=2022-07-01T00:00:00.000Z&to=2022-07-29T00:00:00.000Z`,
+	`https://data.lemon.markets/v1/ohlc/d1?isin=${route.query.search}&from=2022-06-15T00:00:00.000Z&to=2022-07-30T00:00:00.000Z`,
 	{
 		headers: {
 			Authorization: `Bearer ${config.TOKEN}`,

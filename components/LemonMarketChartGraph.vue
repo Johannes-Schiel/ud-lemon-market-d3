@@ -43,11 +43,14 @@ export default {
 					new Date(this.data[0].t),
 					new Date(this.data[this.data.length - 1].t),
 				])
-				.range([
-					this.margin.left + 50,
-					this.width - this.margin.right - 50,
-				])
-				.nice();
+				.range([this.margin.left + 50, this.getWidth]);
+		},
+		getWidth: function (): number {
+			return this.width - this.margin.right - this.margin.left;
+		},
+		getElementWidth: function (): number {
+			const elementWidth: number = (this.width / this.data.length) * 0.4;
+			return elementWidth > 15 ? 15 : elementWidth;
 		},
 	},
 	methods: {
@@ -77,6 +80,7 @@ export default {
 				.call(
 					d3
 						.axisLeft(this.yScale)
+						.ticks(1)
 						.tickFormat((d: number) => `${d}€`)
 						.tickValues(
 							d3
@@ -92,6 +96,7 @@ export default {
 						.selectAll('.tick line')
 						.clone()
 						.attr('stroke-opacity', 0.2)
+						.attr('x1', 10)
 						.attr(
 							'x2',
 							this.width - this.margin.left - this.margin.right
@@ -130,7 +135,7 @@ export default {
 				.append('line')
 				.attr('y1', (d: Ohlc) => this.yScale(d.o))
 				.attr('y2', (d: Ohlc) => this.yScale(d.c))
-				.attr('stroke-width', 10)
+				.attr('stroke-width', this.getElementWidth)
 				.attr('stroke', (d: Ohlc) => this.greenOrRed(d));
 		},
 		createOverlay: function (dataContainer: any): any {
@@ -138,14 +143,14 @@ export default {
 				.append('line')
 				.attr('y1', this.margin.top)
 				.attr('y2', this.height - this.margin.bottom)
-				.attr('stroke-width', 20)
+				.attr('stroke-width', this.getElementWidth)
 				.attr('data-date', (d: Ohlc) => d.t.toString())
 				.attr('class', 'background')
 				.on('mouseenter', ($event) => {
 					const data = this.data.find(
 						(elm: Ohlc) => elm.t === $event.target.dataset.date
 					);
-					this.$emit('user', data);
+					this.$emit('userSelection', data);
 				});
 		},
 		drawD3: function (): void {
@@ -165,10 +170,9 @@ export default {
 	},
 	mounted() {
 		this.drawD3();
-		this.$emit('userselection', this.data[this.data.length - 1]);
 		window.addEventListener('resize', this.drawD3);
 	},
-	emits: ['userselection'],
+	emits: ['userSelection'],
 };
 </script>
 
