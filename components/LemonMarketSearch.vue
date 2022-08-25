@@ -27,6 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 form {
+	width: 100%;
 	margin: 2rem 0 2rem 0;
 	.inputfield {
 		position: relative;

@@ -29,10 +29,7 @@ function change(ohlc: Ohlc): void {
 </script>
 
 <style lang="scss">
-.details {
+.graph {
 	width: 100%;
-	.graph {
-		width: 100%;
-	}
 }
 </style>

@@ -2,9 +2,9 @@
 	<div class="wrapper">
 		<LemonMarketLogo />
 		<LemonMarketSearch :init="route.query.search" />
-		<div v-if="!pending && !error">
+		<template v-if="!pending && !error && instrument.results.length > 0">
 			<LemonMarketInstrument :instrument="instrument.results[0]" />
-		</div>
+		</template>
 		<div class="error" v-if="error"> Keine Daten gefunden </div>
 		<LemonMarketChart />
 	</div>
@@ -25,37 +25,21 @@ const {
 		},
 	}
 );
-
-function mapDetails(instrument: Instrument): LabelValuePair[] {
-	return [
-		{
-			label: 'isin',
-			value: instrument.isin,
-		},
-		{
-			label: 'symbol',
-			value: instrument.symbol,
-		},
-		{
-			label: 'wkn',
-			value: instrument.wkn,
-		},
-		{
-			label: 'type',
-			value: instrument.type,
-		},
-	];
-}
 </script>
 
 <style lang="scss">
 #__nuxt {
 	width: 100%;
+	display: flex;
+	justify-content: center;
 	.wrapper {
 		padding: 2rem;
 		width: 100%;
+		max-width: 80rem;
 		display: flex;
 		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
 		.error {
 			text-align: center;
 			font-size: 2rem;

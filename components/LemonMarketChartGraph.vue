@@ -147,10 +147,10 @@ export default {
 				.attr('data-date', (d: Ohlc) => d.t.toString())
 				.attr('class', 'background')
 				.on('mouseenter', ($event) => {
-					const data = this.data.find(
+					const selectedData: Ohlc = this.data.find(
 						(elm: Ohlc) => elm.t === $event.target.dataset.date
 					);
-					this.$emit('userSelection', data);
+					this.$emit('userSelection', selectedData);
 				});
 		},
 		drawD3: function (): void {
