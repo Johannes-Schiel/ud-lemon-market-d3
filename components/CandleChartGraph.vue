@@ -108,6 +108,7 @@ export default {
 				.selectAll('g')
 				.data(this.data)
 				.join('g')
+				.attr('class', 'candle-bar')
 				.attr('transform', (d: Ohlc) => {
 					return `translate(${x(new Date(d.t))},0)`;
 				});
