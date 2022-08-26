@@ -36,8 +36,40 @@ export default {
 					this.margin.top,
 				]);
 		},
+		getWidth: function (): number {
+			return this.width - this.margin.right - this.margin.left;
+		},
+		xScale: function (): any {
+			return d3
+				.scaleTime()
+				.domain([
+					new Date(this.data[0].t),
+					new Date(this.data[this.data.length - 1].t),
+				])
+				.range([this.margin.left + 50, this.getWidth])
+				.nice();
+		},
 	},
 	methods: {
+		createXAxis: function (g: any): any {
+			return g
+				.attr(
+					'transform',
+					`translate(0, ${this.height - this.margin.bottom / 1.5})`
+				)
+				.style('font-size', '1rem')
+				.call(
+					d3
+						.axisBottom(this.xScale)
+						.ticks(5)
+						.tickFormat((d: any) =>
+							new Date(d).toLocaleDateString()
+						)
+						.tickSizeOuter(0)
+						.tickSizeInner(0)
+				)
+				.call((g) => g.select('.domain').remove());
+		},
 		createYAxis: function (g: any): any {
 			return g
 				.attr('transform', `translate(${this.margin.left - 5}, 0)`)
@@ -70,6 +102,7 @@ export default {
 			this.clearSvg();
 			const svg = d3.select(this.getSvg);
 			svg.attr('viewBox', [0, 0, this.width, this.height]);
+			svg.append('g').call(this.createXAxis);
 			svg.append('g').call(this.createYAxis);
 		},
 	},
