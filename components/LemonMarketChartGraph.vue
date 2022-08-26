@@ -24,8 +24,45 @@ export default {
 		getSvg(): Element {
 			return document.querySelector('svg.graph');
 		},
+		yScale: function (): any {
+			return d3
+				.scaleLog()
+				.domain([
+					d3.min(this.data, (d: Ohlc) => d.l),
+					d3.max(this.data, (d: Ohlc) => d.h),
+				])
+				.rangeRound([
+					this.height - this.margin.bottom,
+					this.margin.top,
+				]);
+		},
 	},
 	methods: {
+		createYAxis: function (g: any): any {
+			return g
+				.attr('transform', `translate(${this.margin.left - 5}, 0)`)
+				.style('font-size', '1rem')
+				.call(
+					d3
+						.axisLeft(this.yScale)
+						.ticks(10)
+						.tickFormat((d: number) => `${d}€`)
+						.tickSizeOuter(0)
+						.tickSizeInner(0)
+				)
+				.call((g) =>
+					g
+						.selectAll('.tick line')
+						.clone()
+						.attr('stroke-opacity', 0.2)
+						.attr('x1', 10)
+						.attr(
+							'x2',
+							this.width - this.margin.left - this.margin.right
+						)
+				)
+				.call((g) => g.select('.domain').remove());
+		},
 		clearSvg(): void {
 			this.getSvg.innerHTML = '';
 		},
@@ -33,6 +70,7 @@ export default {
 			this.clearSvg();
 			const svg = d3.select(this.getSvg);
 			svg.attr('viewBox', [0, 0, this.width, this.height]);
+			svg.append('g').call(this.createYAxis);
 		},
 	},
 	onUnmounted() {
@@ -53,5 +91,16 @@ svg.graph {
 	background-color: rgba($ciWhite, 0.05);
 	border-radius: 1rem;
 	color: rgba($ciWhite, 0.3);
+	.tick {
+		line {
+			stroke: rgba($ciWhite, 1);
+			stroke-dasharray: 0.3rem;
+			stroke-dashoffset: 0.3rem;
+		}
+		text {
+			font-family: $roboto;
+			fill: rgba($ciWhite, 1);
+		}
+	}
 }
 </style>

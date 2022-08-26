@@ -31,4 +31,8 @@ function change(ohlc: Ohlc): void {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.graph {
+	width: 100%;
+}
+</style>
