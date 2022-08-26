@@ -49,6 +49,10 @@ export default {
 				.range([this.margin.left + 50, this.getWidth])
 				.nice();
 		},
+		getElementWidth: function (): number {
+			const elementWidth: number = (this.width / this.data.length) * 0.4;
+			return elementWidth > 15 ? 15 : elementWidth;
+		},
 	},
 	methods: {
 		createXAxis: function (g: any): any {
@@ -98,12 +102,45 @@ export default {
 		clearSvg(): void {
 			this.getSvg.innerHTML = '';
 		},
+		createDataContainer: function (svg: any): any {
+			return svg
+				.append('g')
+				.attr('stroke-linecap', 'round')
+				.attr('class', 'dataset')
+				.selectAll('g')
+				.data(this.data)
+				.join('g')
+				.attr('class', 'candle-bar')
+				.attr('stroke', (d: Ohlc) => this.greenOrRed(d))
+				.attr('transform', (d: Ohlc) => {
+					return `translate(${this.xScale(new Date(d.t))},0)`;
+				});
+		},
+		greenOrRed(ohlc: Ohlc): string {
+			return ohlc.o < ohlc.c ? '#17EB9C' : '#FF0046';
+		},
+		createHighLowLine: function (dataContainer: any): void {
+			dataContainer
+				.append('line')
+				.attr('y1', (d: Ohlc) => this.yScale(d.l))
+				.attr('y2', (d: Ohlc) => this.yScale(d.h));
+		},
+		createOpenClose: function (dataContainer: any): any {
+			dataContainer
+				.append('line')
+				.attr('y1', (d: Ohlc) => this.yScale(d.o))
+				.attr('y2', (d: Ohlc) => this.yScale(d.c))
+				.attr('stroke-width', this.getElementWidth);
+		},
 		drawD3: function (): void {
 			this.clearSvg();
 			const svg = d3.select(this.getSvg);
 			svg.attr('viewBox', [0, 0, this.width, this.height]);
 			svg.append('g').call(this.createXAxis);
 			svg.append('g').call(this.createYAxis);
+			const dataContainer = this.createDataContainer(svg);
+			this.createHighLowLine(dataContainer);
+			this.createOpenClose(dataContainer);
 		},
 	},
 	onUnmounted() {
