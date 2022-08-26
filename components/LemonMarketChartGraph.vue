@@ -132,6 +132,21 @@ export default {
 				.attr('y2', (d: Ohlc) => this.yScale(d.c))
 				.attr('stroke-width', this.getElementWidth);
 		},
+		createOverlay: function (dataContainer: any): any {
+			dataContainer
+				.append('line')
+				.attr('y1', this.margin.top)
+				.attr('y2', this.height - this.margin.bottom)
+				.attr('stroke-width', this.getElementWidth)
+				.attr('data-date', (d: Ohlc) => d.t.toString())
+				.attr('class', 'background')
+				.on('mouseenter', ($event) => {
+					const selectedData: Ohlc = this.data.find(
+						(elm: Ohlc) => elm.t === $event.target.dataset.date
+					);
+					this.$emit('userSelection', selectedData);
+				});
+		},
 		drawD3: function (): void {
 			this.clearSvg();
 			const svg = d3.select(this.getSvg);
@@ -141,6 +156,7 @@ export default {
 			const dataContainer = this.createDataContainer(svg);
 			this.createHighLowLine(dataContainer);
 			this.createOpenClose(dataContainer);
+			this.createOverlay(dataContainer);
 		},
 	},
 	onUnmounted() {
@@ -171,6 +187,15 @@ svg.graph {
 			font-family: $roboto;
 			fill: rgba($ciWhite, 1);
 		}
+	}
+}
+.background {
+	opacity: 0;
+	stroke: rgba($ciWhite, 1);
+	cursor: pointer;
+	transition: 250ms all;
+	&:hover {
+		opacity: 0.05;
 	}
 }
 </style>
