@@ -36,6 +36,9 @@ export default {
 					this.margin.top,
 				]);
 		},
+		getWidth: function (): number {
+			return this.width - this.margin.right - this.margin.left;
+		},
 		xScale: function (): any {
 			return d3
 				.scaleTime()
@@ -43,10 +46,8 @@ export default {
 					new Date(this.data[0].t),
 					new Date(this.data[this.data.length - 1].t),
 				])
-				.range([this.margin.left + 50, this.getWidth]);
-		},
-		getWidth: function (): number {
-			return this.width - this.margin.right - this.margin.left;
+				.range([this.margin.left + 50, this.getWidth])
+				.nice();
 		},
 		getElementWidth: function (): number {
 			const elementWidth: number = (this.width / this.data.length) * 0.4;
@@ -75,19 +76,13 @@ export default {
 		},
 		createYAxis: function (g: any): any {
 			return g
-				.attr('transform', `translate(${this.margin.left - 5},0)`)
+				.attr('transform', `translate(${this.margin.left - 5}, 0)`)
 				.style('font-size', '1rem')
 				.call(
 					d3
 						.axisLeft(this.yScale)
-						.ticks(1)
+						.ticks(10)
 						.tickFormat((d: number) => `${d}€`)
-						.tickValues(
-							d3
-								.scaleLinear()
-								.domain(this.yScale.domain())
-								.ticks()
-						)
 						.tickSizeOuter(0)
 						.tickSizeInner(0)
 				)
@@ -104,9 +99,6 @@ export default {
 				)
 				.call((g) => g.select('.domain').remove());
 		},
-		greenOrRed(ohlc: Ohlc): string {
-			return ohlc.o < ohlc.c ? '#17EB9C' : '#FF0046';
-		},
 		clearSvg(): void {
 			this.getSvg.innerHTML = '';
 		},
@@ -114,20 +106,23 @@ export default {
 			return svg
 				.append('g')
 				.attr('stroke-linecap', 'round')
-				.attr('stroke', '#f7fb2b')
+				.attr('class', 'dataset')
 				.selectAll('g')
 				.data(this.data)
 				.join('g')
 				.attr('class', 'candle-bar')
+				.attr('stroke', (d: Ohlc) => this.greenOrRed(d))
 				.attr('transform', (d: Ohlc) => {
 					return `translate(${this.xScale(new Date(d.t))},0)`;
 				});
 		},
-		createHighLowLine: function (dataContainer: any): any {
+		greenOrRed(ohlc: Ohlc): string {
+			return ohlc.o < ohlc.c ? '#17EB9C' : '#FF0046';
+		},
+		createHighLowLine: function (dataContainer: any): void {
 			dataContainer
 				.append('line')
 				.attr('y1', (d: Ohlc) => this.yScale(d.l))
-				.attr('stroke', (d: Ohlc) => this.greenOrRed(d))
 				.attr('y2', (d: Ohlc) => this.yScale(d.h));
 		},
 		createOpenClose: function (dataContainer: any): any {
@@ -135,8 +130,7 @@ export default {
 				.append('line')
 				.attr('y1', (d: Ohlc) => this.yScale(d.o))
 				.attr('y2', (d: Ohlc) => this.yScale(d.c))
-				.attr('stroke-width', this.getElementWidth)
-				.attr('stroke', (d: Ohlc) => this.greenOrRed(d));
+				.attr('stroke-width', this.getElementWidth);
 		},
 		createOverlay: function (dataContainer: any): any {
 			dataContainer
@@ -184,12 +178,13 @@ svg.graph {
 	border-radius: 1rem;
 	color: rgba($ciWhite, 0.3);
 	.tick {
-		stroke: rgba($ciWhite, 1);
-		stroke-dasharray: 0.3rem;
-		stroke-dashoffset: 0.3rem;
+		line {
+			stroke: rgba($ciWhite, 1);
+			stroke-dasharray: 0.3rem;
+			stroke-dashoffset: 0.3rem;
+		}
 		text {
 			font-family: $roboto;
-			stroke-width: 0;
 			fill: rgba($ciWhite, 1);
 		}
 	}

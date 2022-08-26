@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { PropType } from 'vue';
-
 export default {
 	props: {
 		instrument: {
@@ -49,6 +48,7 @@ export default {
 		}
 	}
 }
+
 .container {
 	display: grid;
 	grid-gap: 1rem;

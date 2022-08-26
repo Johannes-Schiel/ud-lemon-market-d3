@@ -14,9 +14,9 @@
 const route = useRoute();
 const config = useRuntimeConfig();
 const {
-	data: instrument,
 	pending,
 	error,
+	data: instrument,
 } = await useFetch<InstrumentResponse>(
 	`https://data.lemon.markets/v1/instruments/?isin=${route.query.search}`,
 	{

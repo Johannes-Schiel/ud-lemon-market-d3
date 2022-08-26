@@ -9,7 +9,6 @@
 
 <script lang="ts">
 import { PropType } from 'vue';
-
 export default {
 	props: {
 		ohlc: {

@@ -1,6 +1,9 @@
 <template>
 	<template v-if="!pending && !error">
-		<LemonMarketChartOhlc :ohlc="state.currentOhlc || data.results[0]" />
+		<LemonMarketChartOhlc
+			:ohlc="
+				state.currentOhlc || data.results[data.results.length - 1]
+			" />
 		<div class="graph">
 			<LemonMarketChartGraph
 				@userSelection="change($event)"
